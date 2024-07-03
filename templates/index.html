@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Real-time Graph</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <div id="chart"></div>
+    <script>
+        function updateGraph() {
+            $.ajax({
+                url: '/data',
+                type: 'GET',
+                success: function(data) {
+                    Plotly.newPlot('chart', JSON.parse(data));
+                }
+            });
+        }
+
+        // Update every 5 seconds
+        setInterval(updateGraph, 5000);
+
+        // Initial graph
+        updateGraph();
+    </script>
+</body>
+</html>
